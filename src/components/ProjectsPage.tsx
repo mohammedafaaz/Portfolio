@@ -15,7 +15,7 @@ const projects = [
     id: 2,
     title: 'Pothole Detection & Reporting System',
     description: 'Built a real-time web app using YOLOv8 and Flask to detect road hazards like potholes via webcam. Integrated geolocation, severity analysis, and a user-friendly interface for reporting.',
-    tags: ['YOLOv8', 'Flask', 'Machine Learning', 'Python'],
+    tags: ['YOLOv8', 'Flask', 'Ultralytics', 'Python'],
     github: 'https://github.com/mohammedafaaz',
     demo: null
   },
@@ -31,7 +31,7 @@ const projects = [
     id: 4,
     title: 'VibeBuild',
     description: 'An agency website showcasing creative services, portfolio works, and contact information with a focus on aesthetics and user experience.',
-    tags: ['React', 'CSS', 'Web Design'],
+    tags: ['React', 'Tailwind CSS', 'Web Design'],
     github: null,
     demo: 'https://vibe-build-agency.vercel.app/'
   }
@@ -46,12 +46,12 @@ const ProjectCard = ({ project }: { project: any }) => {
       viewport={{ once: true, margin: "-50px" }}
       className="h-full relative z-10"
     >
-      <div className="backdrop-blur-lg rounded-xl overflow-hidden border border-blue-800/10 hover:border-blue-800/30 transition-all duration-300 h-full flex flex-col p-6">
+      <div className="backdrop-blur-lg rounded-xl overflow-hidden border border-purple-900 hover:border-blue-800/30 transition-all duration-300 h-full flex flex-col p-6">
         <div className="flex-grow">
           <div className="flex items-start justify-between mb-4">
             <h3 className="text-xl font-bold text-white">{project.title}</h3>
             {project.achievement && (
-              <div className="bg-blue-800/40 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-blue-700/30">
+              <div className="bg-purple-800/40 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-blue-700/30">
                 {project.achievement}
               </div>
             )}
@@ -92,7 +92,7 @@ const ProjectCard = ({ project }: { project: any }) => {
               className="px-4 py-2 rounded-lg bg-transparent backdrop-blur-md text-white flex items-center space-x-2 transition-all duration-300 hover:shadow-lg hover:shadow-blue-800/20 border border-blue-800/30 bg-blue-800/10"
             >
               <ExternalLink size={16} />
-              <span>Live Demo</span>
+              <span>View</span>
             </a>
           )}
         </div>

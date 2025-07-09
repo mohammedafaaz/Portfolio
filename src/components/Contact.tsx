@@ -1,18 +1,21 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Send } from 'lucide-react';
-import emailjs from '@emailjs/browser';
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 const Contact = () => {
   const formRef = useRef(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     message: '',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -24,67 +27,45 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
 
-    // EmailJS configuration (verified)
-    const serviceId = 'service_x8v9ypr';
-    const templateId = 'template_19p96gi';
-    const publicKey = 'DpVFhVvAzGSEm27wq';
-    
-    // Initialize EmailJS
-    emailjs.init(publicKey);
-    
-    // Ensure template parameters match exactly what your EmailJS template expects
-    const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      message: formData.message,
-      reply_to: formData.email,
-      to_name: "Mohammed Afaaz", // Add recipient name for template
-      to_email: "mohammedafaaz433@gmail.com" // Add recipient email for template
-    };
+    // Validate form data
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      alert('Please fill in all fields.');
+      return;
+    }
 
-    // EmailJS is already initialized above
-    
-    // Log to confirm params
-    console.log("Sending email with params:", templateParams);
-    
-    emailjs.send(serviceId, templateId, templateParams)
-      .then((response) => {
-        console.log('Email sent successfully, response:', response);
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          message: '',
-        });
-        
-        // Reset submission status after a delay
-        setTimeout(() => {
-          setIsSubmitted(false);
-        }, 5000);
-      })
-      .catch((err) => {
-        console.error('EmailJS error details:', err);
-        setIsSubmitting(false);
-        
-        // More descriptive error message based on error type
-        if (err.status === 400) {
-          setError('Invalid form data. Please check your inputs and try again.');
-        } else if (err.status === 403 || err.status === 401) {
-          setError('Authentication error with email service. Please try again or contact directly.');
-        } else if (err.status >= 500) {
-          setError('Email server error. Please try again later.');
-        } else if (!navigator.onLine) {
-          setError('No internet connection. Please check your network and try again.');
-        } else {
-          setError('Message could not be sent. Please try again or contact directly at mohammedafaaz433@gmail.com');
-        }
-      });
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // Open email client with form data
+    const subject = encodeURIComponent('Contact from Portfolio Website');
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n\n` +
+      `Message:\n${formData.message}`
+    );
+
+    const mailtoLink = `mailto:mohammedafaaz433@gmail.com?subject=${subject}&body=${body}`;
+    window.open(mailtoLink, '_blank');
+
+    // Show success message
+    setIsSubmitted(true);
+
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      message: '',
+    });
+
+    // Reset success message after 5 seconds
+    setTimeout(() => {
+      setIsSubmitted(false);
+    }, 5000);
   };
 
   return (
@@ -152,7 +133,7 @@ const Contact = () => {
             viewport={{ once: true, margin: "-50px" }}
             className="relative z-10"
           >
-            <form 
+            <form
               ref={formRef}
               onSubmit={handleSubmit}
               className="backdrop-blur-lg p-8 rounded-xl border border-purple-500/10 relative z-10"
@@ -170,94 +151,69 @@ const Contact = () => {
                       <Check size={28} className="text-blue-500" />
                     </div>
                   </div>
-                  <h4 className="text-xl font-medium text-white mb-2">Message Sent!</h4>
+                  <h4 className="text-xl font-medium text-white mb-2">Email Client Opened!</h4>
                   <p className="text-gray-300">
-                    Thank you for reaching out. I'll get back to you as soon as possible.
+                    Your email client should have opened with your message. Please send the email to complete your contact request.
                   </p>
                 </motion.div>
               ) : (
-                <>
-                  {error && (
-                    <div className="p-4 mb-4 rounded-lg bg-transparent backdrop-blur-md border border-red-500/30 text-red-200">
-                      {error}
-                    </div>
-                  )}
-                  
-                  <div className="space-y-4">
-                    <div>
-                      <label htmlFor="name" className="block text-gray-300 mb-2">
-                        Your Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-transparent backdrop-blur-sm border border-gray-700 text-white focus:outline-none focus:border-purple-500/50 transition-colors"
-                        placeholder="Name"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-gray-300 mb-2">
-                        Your Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-transparent backdrop-blur-sm border border-gray-700 text-white focus:outline-none focus:border-purple-500/50 transition-colors"
-                        placeholder="email"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="message" className="block text-gray-300 mb-2">
-                        Message
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows={4}
-                        className="w-full px-4 py-3 rounded-lg bg-transparent backdrop-blur-sm border border-gray-700 text-white focus:outline-none focus:border-purple-500/50 transition-colors resize-none"
-                        placeholder="Your message here..."
-                      ></textarea>
-                    </div>
-                    
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className={`w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center transition-all duration-300 ${
-                        isSubmitting
-                          ? 'bg-blue-800/30 cursor-not-allowed'
-                          : 'bg-transparent backdrop-blur-md hover:shadow-lg hover:shadow-blue-800/20 border border-blue-800/30'
-                      } text-white`}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          Send Message
-                          <Send size={18} className="ml-2" />
-                        </>
-                      )}
-                    </button>
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-gray-300 mb-2">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg bg-transparent backdrop-blur-sm border border-gray-700 text-white focus:outline-none focus:border-purple-500/50 transition-colors"
+                      placeholder="Name"
+                    />
                   </div>
-                </>
+
+                  <div>
+                    <label htmlFor="email" className="block text-gray-300 mb-2">
+                      Your Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg bg-transparent backdrop-blur-sm border border-gray-700 text-white focus:outline-none focus:border-purple-500/50 transition-colors"
+                      placeholder="email"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-gray-300 mb-2">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={4}
+                      className="w-full px-4 py-3 rounded-lg bg-transparent backdrop-blur-sm border border-gray-700 text-white focus:outline-none focus:border-purple-500/50 transition-colors resize-none"
+                      placeholder="Your message here..."
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center transition-all duration-300 bg-transparent backdrop-blur-md hover:shadow-lg hover:shadow-blue-800/20 border border-blue-800/30 text-white hover:bg-blue-800/10"
+                  >
+                    Send Message
+                    <Send size={18} className="ml-2" />
+                  </button>
+                </div>
               )}
             </form>
           </motion.div>

@@ -24,7 +24,7 @@ const Hero = () => {
         </div>
         
         {/* Gradient overlays */}
-        <div className="absolute top-0 left-0 right-0 h-screen bg-gradient-to-b from-purple-900/20 via-black to-black"></div>
+        <div className="absolute top-0 left-0 right-0 h-screen bg-gradient-to-b from-purple-900/30 via-black to-black"></div>
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-700/20 rounded-full filter blur-3xl opacity-20"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-700/20 rounded-full filter blur-3xl opacity-20"></div>
         
