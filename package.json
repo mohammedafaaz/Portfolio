@@ -1,4 +1,9 @@
 {
+  "build": {
+    "env": {
+      "NPM_CONFIG_LEGACY_PEER_DEPS": "true"
+    }
+  },
   "name": "mocha-app",
   "private": true,
   "version": "0.0.0",
