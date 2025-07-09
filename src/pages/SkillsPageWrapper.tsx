@@ -1,4 +1,3 @@
-import React from 'react';
 import SkillsPage from '../components/SkillsPage';
 
 const SkillsPageWrapper = () => {
