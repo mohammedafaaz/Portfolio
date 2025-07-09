@@ -1,4 +1,4 @@
-import React, { useEffect,  } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './index.css';
@@ -7,12 +7,33 @@ import './index.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-// Pages - Use normal imports instead of lazy loading for initial troubleshooting
+// Lazy load pages for better performance
 import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ProjectsPage from './pages/ProjectsPageWrapper';
-import SkillsPage from './pages/SkillsPageWrapper';
-import ContactPage from './pages/ContactPage';
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPageWrapper'));
+const SkillsPage = lazy(() => import('./pages/SkillsPageWrapper'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+
+// Loading component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-black">
+    <motion.div
+      className="flex flex-col items-center space-y-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      <motion.div
+        className="w-12 h-12 border-2 border-blue-500 border-t-transparent rounded-full"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+      />
+      <p className="text-white/80 text-sm" style={{ fontFamily: "'Playfair Display', serif" }}>
+        Loading...
+      </p>
+    </motion.div>
+  </div>
+);
 
 
 export function App() {
@@ -46,8 +67,8 @@ export function App() {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-700/20 rounded-full filter blur-3xl opacity-20"></div>
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-700/20 rounded-full filter blur-3xl opacity-20"></div>
       
-      {/* Stars */}
-      {Array.from({ length: 100 }).map((_, i) => (
+      {/* Stars - Reduced count for better performance */}
+      {Array.from({ length: 30 }).map((_, i) => (
         <motion.div
           key={i}
           className="absolute bg-white rounded-full will-change-transform"
@@ -75,15 +96,16 @@ export function App() {
       <div className="relative min-h-screen font-sans overflow-x-hidden" style={{ fontFamily: "'Poppins', sans-serif" }}>
         <BackgroundParticles />
         <Navbar />
-        {/* Removed Suspense for troubleshooting */}
         <div className="relative z-10">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/skills" element={<SkillsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/skills" element={<SkillsPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
+          </Suspense>
         </div>
         <Footer />
       </div>
