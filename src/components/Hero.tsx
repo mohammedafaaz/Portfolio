@@ -13,12 +13,39 @@ const Hero = () => {
       
       {/* Grid Background */}
       <div className="absolute inset-0 z-0 bg-black">
-        {/* Grid overlay */}
+        {/* Enhanced Grid overlay - Much more visible */}
         <div className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(rgba(54, 21, 85, 0.3) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(54, 21, 85, 0.3) 1px, transparent 1px)`,
-            backgroundSize: '80px 80px',
+            backgroundImage: `
+              linear-gradient(rgba(147, 51, 234, 0.8) 2px, transparent 2px),
+              linear-gradient(90deg, rgba(147, 51, 234, 0.8) 2px, transparent 2px)
+            `,
+            backgroundSize: '60px 60px',
+            backgroundPosition: 'center center',
+          }}>
+        </div>
+
+        {/* Additional glowing grid overlay for more visibility */}
+        <div className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(59, 130, 246, 0.6) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(59, 130, 246, 0.6) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+            backgroundPosition: 'center center',
+            filter: 'blur(0.5px)',
+          }}>
+        </div>
+
+        {/* Subtle secondary grid for depth */}
+        <div className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(168, 85, 247, 0.4) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(168, 85, 247, 0.4) 1px, transparent 1px)
+            `,
+            backgroundSize: '20px 20px',
             backgroundPosition: 'center center',
           }}>
         </div>
