@@ -11,124 +11,30 @@ const Hero = () => {
       {/* Scroll Indicator */}
       <ScrollIndicator />
       
-      {/* Grid Background */}
+      {/* 3D Spline Model Background */}
       <div className="absolute inset-0 z-0 bg-black">
-        {/* Enhanced Grid overlay - Much more visible */}
-        <div className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(147, 51, 234, 0.8) 2px, transparent 2px),
-              linear-gradient(90deg, rgba(147, 51, 234, 0.8) 2px, transparent 2px)
-            `,
-            backgroundSize: '60px 60px',
-            backgroundPosition: 'center center',
-          }}>
-        </div>
+        {/* 3D Spline Model Iframe */}
+        <iframe
+          src='https://my.spline.design/orb-RlZ322UktdCdmp3DWg9jtXRn/'
+          width='100%'
+          height='100%'
+          className="absolute inset-0 w-full h-full border-0"
+          style={{ zIndex: 1 }}
+          title="3D Spline Model Background"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        />
 
-        {/* Additional glowing grid overlay for more visibility */}
-        <div className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(59, 130, 246, 0.6) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(59, 130, 246, 0.6) 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px',
-            backgroundPosition: 'center center',
-            filter: 'blur(0.5px)',
-          }}>
-        </div>
+        {/* Optional overlay for text readability - adjust opacity as needed */}
+        <div className="absolute inset-0 bg-black/10" style={{ zIndex: 2 }}></div>
 
-        {/* Subtle secondary grid for depth */}
-        <div className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(168, 85, 247, 0.4) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(168, 85, 247, 0.4) 1px, transparent 1px)
-            `,
-            backgroundSize: '20px 20px',
-            backgroundPosition: 'center center',
-          }}>
-        </div>
-        
-        {/* Gradient overlays */}
-        <div className="absolute top-0 left-0 right-0 h-screen bg-gradient-to-b from-purple-900/30 via-black to-black"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-700/20 rounded-full filter blur-3xl opacity-20"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-700/20 rounded-full filter blur-3xl opacity-20"></div>
-        
-        {/* Large Moving Glowing Ball */}
-        <motion.div
-          className="absolute will-change-transform pointer-events-none"
-          style={{
-            width: '200px',
-            height: '200px',
-            zIndex: 2
-          }}
-          animate={{
-            x: ['10vw', '80vw', '20vw', '70vw', '10vw'],
-            y: ['20vh', '70vh', '30vh', '60vh', '20vh'],
-            scale: [1, 1.2, 0.8, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        >
-          {/* Main glowing ball */}
-          <motion.div
-            className="w-full h-full rounded-full relative"
-            style={{
-              background: `radial-gradient(circle,
-                rgba(147, 51, 234, 0.8) 0%,
-                rgba(59, 130, 246, 0.6) 30%,
-                rgba(147, 51, 234, 0.4) 60%,
-                transparent 100%)`,
-              filter: 'blur(2px)',
-              boxShadow: `
-                0 0 60px rgba(147, 51, 234, 0.6),
-                0 0 120px rgba(59, 130, 246, 0.4),
-                0 0 180px rgba(147, 51, 234, 0.2)
-              `
-            }}
-            animate={{
-              opacity: [0.6, 1, 0.8, 1, 0.6],
-              boxShadow: [
-                '0 0 60px rgba(147, 51, 234, 0.6), 0 0 120px rgba(59, 130, 246, 0.4), 0 0 180px rgba(147, 51, 234, 0.2)',
-                '0 0 80px rgba(147, 51, 234, 0.8), 0 0 160px rgba(59, 130, 246, 0.6), 0 0 240px rgba(147, 51, 234, 0.3)',
-                '0 0 60px rgba(147, 51, 234, 0.6), 0 0 120px rgba(59, 130, 246, 0.4), 0 0 180px rgba(147, 51, 234, 0.2)'
-              ]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
+        {/* Gradient overlays - positioned above 3D model */}
+        <div className="absolute top-0 left-0 right-0 h-screen bg-gradient-to-b from-purple-900/20 via-transparent to-black/30" style={{ zIndex: 3 }}></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-700/15 rounded-full filter blur-3xl opacity-20" style={{ zIndex: 3 }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-700/15 rounded-full filter blur-3xl opacity-20" style={{ zIndex: 3 }}></div>
 
-          {/* Inner bright core */}
-          <motion.div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full"
-            style={{
-              background: `radial-gradient(circle,
-                rgba(255, 255, 255, 0.9) 0%,
-                rgba(147, 51, 234, 0.8) 50%,
-                transparent 100%)`,
-              filter: 'blur(1px)',
-              boxShadow: '0 0 30px rgba(255, 255, 255, 0.8)'
-            }}
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.8, 1, 0.8]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
-        </motion.div>
 
-        {/* Stars */}
+
+        {/* Stars - positioned behind 3D model */}
         {Array.from({ length: 50 }).map((_, i) => (
           <motion.div
             key={i}
@@ -138,7 +44,7 @@ const Hero = () => {
               height: Math.random() * 2 + 1 + 'px',
               left: Math.random() * 100 + '%',
               top: Math.random() * 100 + '%',
-              zIndex: 1
+              zIndex: 0
             }}
             animate={{
               opacity: [0.2, 0.8, 0.2],

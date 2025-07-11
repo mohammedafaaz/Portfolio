@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
 
 const projects = [
   {
@@ -40,10 +41,9 @@ const projects = [
 const ProjectCard = ({ project }: { project: any }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      viewport={{ once: true, margin: "-50px" }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className="h-full relative z-10"
     >
       <div className="backdrop-blur-lg rounded-xl overflow-hidden border border-purple-900 hover:border-blue-800/30 transition-all duration-300 h-full flex flex-col p-6">
@@ -79,7 +79,7 @@ const ProjectCard = ({ project }: { project: any }) => {
               rel="noopener noreferrer"
               className="px-4 py-2 rounded-lg bg-transparent backdrop-blur-md text-white flex items-center space-x-2 transition-all duration-300 hover:bg-gray-700/30 border border-white/20 bg-white/5"
             >
-              <Github size={16} />
+              <FaGithub size={16} />
               <span>Code</span>
             </a>
           )}

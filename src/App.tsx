@@ -9,8 +9,8 @@ import Footer from './components/Footer';
 
 // Lazy load pages for better performance
 import HomePage from './pages/HomePage';
+import ProjectsPage from './pages/ProjectsPageWrapper'; // Load immediately for better UX
 const AboutPage = lazy(() => import('./pages/AboutPage'));
-const ProjectsPage = lazy(() => import('./pages/ProjectsPageWrapper'));
 const SkillsPage = lazy(() => import('./pages/SkillsPageWrapper'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 
