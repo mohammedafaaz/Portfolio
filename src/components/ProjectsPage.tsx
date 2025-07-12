@@ -51,7 +51,7 @@ const ProjectCard = ({ project }: { project: any }) => {
           <div className="flex items-start justify-between mb-4">
             <h3 className="text-xl font-bold text-white">{project.title}</h3>
             {project.achievement && (
-              <div className="bg-purple-800/40 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-blue-700/30">
+              <div className="bg-purple-800/40 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-purple-700/30">
                 {project.achievement}
               </div>
             )}
