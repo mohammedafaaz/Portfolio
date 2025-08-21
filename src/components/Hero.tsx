@@ -13,13 +13,111 @@ const Hero = () => {
       
       {/* Clean Background */}
       <div className="absolute inset-0 z-0 bg-black">
+        {/* Grid overlay */}
+        <div className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(rgba(54, 21, 85, 0.15) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(54, 21, 85, 0.15) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px',
+            backgroundPosition: 'center center',
+          }}>
+        </div>
+
+        {/* Enhanced Subtle Dots Pattern - Multiple Layers */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, rgba(147, 51, 234, 0.2) 1px, transparent 1px)',
+          backgroundSize: '30px 30px',
+          backgroundPosition: '0 0, 15px 15px',
+        }}>
+          <motion.div
+            className="w-full h-full"
+            animate={{
+              opacity: [0.5, 0.9, 0.5],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </div>
+
+        {/* Secondary Dot Layer - Larger Spacing */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, rgba(147, 51, 234, 0.15) 1.5px, transparent 1.5px)',
+          backgroundSize: '60px 60px',
+          backgroundPosition: '30px 30px',
+        }}>
+          <motion.div
+            className="w-full h-full"
+            animate={{
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          />
+        </div>
+
+        {/* Tertiary Dot Layer - Even Larger Spacing */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, rgba(147, 51, 234, 0.1) 2px, transparent 2px)',
+          backgroundSize: '120px 120px',
+          backgroundPosition: '60px 60px',
+        }}>
+          <motion.div
+            className="w-full h-full"
+            animate={{
+              opacity: [0.2, 0.6, 0.2],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2,
+            }}
+          />
+        </div>
 
         {/* Gradient overlays */}
         <div className="absolute top-0 left-0 right-0 h-screen bg-gradient-to-b from-purple-900/30 via-black to-black"></div>
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-700/20 rounded-full filter blur-3xl opacity-20"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-700/20 rounded-full filter blur-3xl opacity-20"></div>
 
+        {/* Animated Code Brackets */}
+        <motion.div
+          className="absolute top-1/3 left-10 text-purple-400/40 text-6xl font-mono"
+          animate={{
+            opacity: [0.2, 0.6, 0.2],
+            scale: [0.9, 1.1, 0.9],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          {'<'}
+        </motion.div>
 
+        <motion.div
+          className="absolute top-1/3 right-10 text-purple-400/40 text-6xl font-mono"
+          animate={{
+            opacity: [0.2, 0.6, 0.2],
+            scale: [0.9, 1.1, 0.9],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        >
+          {'>'}
+        </motion.div>
 
         {/* Stars */}
         {Array.from({ length: 50 }).map((_, i) => (

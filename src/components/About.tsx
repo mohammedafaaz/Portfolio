@@ -86,7 +86,7 @@ const About = () => {
                 
                 <div className="space-y-6 text-gray-300">
                   <p>
-                    I'm a B.E Undergraduate in AIML at BITM, Ballari. I'm passionate about AI innovation, real-time web apps, and smart solutions using machine learning. I'm always looking for new challenges and opportunities to expand my knowledge and skills.
+                    I'm a 2nd Year B.E Undergraduate in AIML at BITM, Ballari. I'm passionate about AI innovation, real-time web apps, and smart solutions using machine learning. I'm always looking for new challenges and opportunities to expand my knowledge and skills.
                   </p>
                   
                   <p>
