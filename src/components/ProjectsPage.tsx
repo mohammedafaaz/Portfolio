@@ -5,20 +5,21 @@ import { FaGithub } from 'react-icons/fa';
 const projects = [
   {
     id: 1,
+    title: 'Pothole Detection & Reporting System',
+    description: 'Built a real-time web app using YOLOv8 and Flask to detect road hazards like potholes via webcam. Integrated geolocation, severity analysis, and a user-friendly interface for reporting.',
+    tags: ['React', 'Python', 'YOLOv8', 'Flask', 'Ultralytics'],
+    github: 'https://github.com/mohammedafaaz',
+    demo: null,
+    achievement: '3rd place in SIH (internal) & IGNITRON2K25 GMU'
+  },
+  {
+    id: 2,
     title: 'VeriPass',
     description: 'A smart web app for verifying student bus passes using QR code and face recognition, with automatic data logging and daily boarding reports.',
     tags: ['React', 'Python', 'OpenCV', 'Face Recognition'],
     github: 'https://github.com/mohammedafaaz',
     demo: null,
-    achievement: '4th place in HACKB2K25'
-  },
-  {
-    id: 2,
-    title: 'Pothole Detection & Reporting System',
-    description: 'Built a real-time web app using YOLOv8 and Flask to detect road hazards like potholes via webcam. Integrated geolocation, severity analysis, and a user-friendly interface for reporting.',
-    tags: ['YOLOv8', 'Flask', 'Ultralytics', 'Python'],
-    github: 'https://github.com/mohammedafaaz',
-    demo: null
+    achievement: '4th place in HACKB2K25 BITM'
   },
   {
     id: 3,
